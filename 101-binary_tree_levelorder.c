@@ -19,25 +19,41 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	return (height_r > height_l ? height_r : height_l);
 }
 
-void print_tree_level(const binary_tree_t *tree, size_t level, void (*func)(int))
+/**
+ * print_tree - print binary tree level-order
+ * @tree: the tree
+ * @level: the level to print
+ * @func: function to execute
+ * Return: Nothing
+ **/
+
+void print_tree(const binary_tree_t *tree, size_t level, void (*func)(int))
 {
-    if (tree == NULL)
-        return;
-    if (level == 1)
-        func(tree->n);
-    else if (level > 1)
-    {
-        print_tree_level(tree->left, level - 1, func);
-        print_tree_level(tree->right, level - 1, func);
-    }
+	if (tree == NULL)
+		return;
+	if (level == 1)
+		func(tree->n);
+	else if (level > 1)
+	{
+		print_tree(tree->left, level - 1, func);
+		print_tree(tree->right, level - 1, func);
+	}
 }
+
+/**
+ * binary_tree_levelorder - print binary tree in level-order
+ * @tree: the tree
+ * @func: function to execute
+ * Return: Nothing
+ **/
 
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
-    size_t level = 0, i = 0;
+	size_t level = 0, i = 0;
 
-    level = binary_tree_height(tree) + 1;
-    for (i = 1; i <= level; i++)
-        print_tree_level(tree, i, func);
+	if (tree == NULL || func == NULL)
+		return (NULL);
+	level = binary_tree_height(tree) + 1;
+	for (i = 1; i <= level; i++)
+		print_tree(tree, i, func);
 }
-
