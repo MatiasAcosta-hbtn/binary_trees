@@ -37,19 +37,21 @@ bst_t *bst_insert(bst_t **tree, int value)
 	/* If the tree is empty, return a new node */
 
 	root = *tree;
-
-	if (tree == NULL)
-		return (binary_tree_node(root, value));
-
 	new = binary_tree_node(root, value);
+	
 	if (new == NULL)
 		return (NULL);
-	/* Otherwise, recur down the tree */
-	if (value < new->n)
-		new->left = bst_insert(&root->left, value);
-	else if (value > new->n)
-		new->right = bst_insert(&root->right, value);
 
+	if (root == NULL)
+		return (new);
+
+	/* Otherwise, recur down the tree */
+	if (value < root->n)
+		root->left = bst_insert(&root->left, value);
+	else if (value > root->n)
+		root->right = bst_insert(&root->right, value);
+
+	
 	/* return the (unchanged) node pointer */
 	return (new);
 }
