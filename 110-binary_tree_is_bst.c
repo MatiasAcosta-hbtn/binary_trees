@@ -1,7 +1,15 @@
 #include "binary_trees.h"
 
+/**
+ * isBST - Check if a binary tree is a BST
+ * @tree: root of the tree
+ * @left: left node
+ * @right: right node
+ * Return: 1 if is BST 0 is not
+ **/
 
-int isBST(const binary_tree_t *tree, const binary_tree_t *left, const binary_tree_t *right)
+
+int isBST(const bt *tree, const bt *left, const bt *right)
 {
 	if (tree == NULL)
 		return (1);
@@ -14,6 +22,12 @@ int isBST(const binary_tree_t *tree, const binary_tree_t *left, const binary_tre
 	return (isBST(tree->left, left, tree) && isBST(tree->right, tree, right));
 }
 
+/**
+ * binary_tree_is_bst - Check if a binary tree is a BST
+ * @tree: root of the tree
+ * Return: 1 if is BST 0 is not
+ **/
+
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
 	binary_tree_t *left = NULL, *right = NULL;
@@ -21,5 +35,5 @@ int binary_tree_is_bst(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (0);
 
-	return isBST(tree, left, right);
+	return (isBST(tree, left, right));
 }
